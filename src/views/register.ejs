@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="min-h-screen w-screen bg-red-100 flex flex-col items-center  px-4"
+  >
+    <%- include("./nav") %>
+    <h1 class="text-4xl font-sans mt-4">Register page</h1>
+    <form
+      class="h-96 w-56 flex flex-col justify-evenly items-center border border-black rounded mt-6"
+      action="/users/create"
+      method="post"
+    >
+      <input
+        class="rounded px-3 py-2 bg-gray-900 text-white"
+        type="text"
+        name="userName"
+        placeholder="enter your name"
+      />
+      <input
+        class="rounded px-3 py-2 bg-gray-900 text-white"
+        type="text"
+        name="email"
+        placeholder="enter your email"
+      />
+      <input
+        class="rounded px-3 py-2 bg-gray-900 text-white"
+        type="password"
+        name="password"
+        placeholder="enter password"
+      />
+      <input
+        class="px-3 py-2 rounded-xl bg-black text-xl text-white"
+        type="submit"
+      />
+    </form>
+  </body>
+</html>
