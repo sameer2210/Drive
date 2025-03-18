@@ -19,13 +19,14 @@ module.exports.createUserPost = async (req, res) => {
     });
     // res.send(errors);
   }
-
+  try {
   const { userName, email, password } = req.body;
 
   const existUser = await userModel.findOne({ email });
 
   if (existUser) {
-    res.send(`user already Exist`);
+    // res.send(`user already Exist`);
+    return res.status(400).json({ message: "User already exists" });
   }
   const hashPassword = await bcryptjs.hash(password, 10);
 
@@ -43,14 +44,19 @@ module.exports.createUserPost = async (req, res) => {
     process.env.jwt_seC_key
   );
 
-  res.cookie("token", token);
-  res.redirect("/users/login");
+  res.status(201).cookie("token", token).json({
+    message: "User registered successfully",
+  });
+  } catch (error) {
+  res.status(500).json({ error: error.message });
+  }
 };
 
 module.exports.loginUserGet = (req, res) => {
   res.render("login");
 };
 module.exports.loginUserPost = async (req, res) => {
+  try{
   const { email, password } = req.body;
 
   const existUser = await userModel.findOne({ email });
@@ -74,6 +80,12 @@ module.exports.loginUserPost = async (req, res) => {
 
   res.cookie("token", token);
   res.redirect("/users/profile");
+  //  res.status(201).cookie("token", token).json({
+  //     message: "User registered successfully",
+  //   });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 module.exports.profileUserGet = (req, res) => {
