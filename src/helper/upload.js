@@ -4,16 +4,26 @@ cloudinary.config({
     cloud_name: process.env.CLOUD_NAME, 
     api_key: process.env.API_KEY, 
     api_secret: process.env.API_SECRET
-  });
+});
 
-const uploadFile = async(filePath) => {
+// Upload file buffer to Cloudinary
+const uploadFile = async (fileBuffer) => {
     try {
-        const result = await cloudinary.uploader.upload(filePath);
-        console.log(result);
+        // Upload file directly from buffer
+        const result = await cloudinary.uploader.upload_stream(
+            { resource_type: 'auto' }, // Automatically detects the file type (image, video, etc.)
+            (error, result) => {
+                if (error) {
+                    console.log(error.message);
+                    return;
+                }
+                console.log(result);
+            }
+        ).end(fileBuffer); // End the stream with the file buffer
         return result;
-    }catch (error) {
+    } catch (error) {
         console.log(error.message);
     }
-}
+};
 
 module.exports = uploadFile;
