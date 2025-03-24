@@ -3,20 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Drive</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    
-    <nav class="w-screen flex justify-between p-4 bg-black text-white">
-      <h1>Drive</h1>
-      <div class="links flex gap-8">
-        <a href="/users/">Register</a>
-        <a href="/users/login">Log in</a>
-        <a href="/users/profile">Home</a>
+  <body class="bg-gray-100">
+    <nav class="w-full bg-black text-white p-4">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <h1 class="text-3xl font-bold flex items-center gap-2">
+          <span class="text-blue-500"></span> DriveLink
+        </h1>
+        
+        <!-- Desktop Links -->
+        <div class="hidden md:flex gap-6 text-lg">
+          <a href="/users/" class="hover:text-blue-400 transition">Register</a>
+          <a href="/users/login" class="hover:text-blue-400 transition">Log in</a>
+          <a href="/users/profile" class="hover:text-blue-400 transition">Home</a>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">☰</button>
+      </div>
+      
+      <!-- Mobile Links -->
+      <div id="mobile-menu" class="hidden md:hidden flex flex-col gap-4 mt-4 text-center text-lg">
+        <a href="/users/" class="block hover:text-blue-400">Register</a>
+        <a href="/users/login" class="block hover:text-blue-400">Log in</a>
+        <a href="/users/profile" class="block hover:text-blue-400">Home</a>
       </div>
     </nav>
-
-
+    
+   
   </body>
 </html>

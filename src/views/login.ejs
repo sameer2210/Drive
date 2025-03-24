@@ -3,37 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Login | DriveLink</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body
-    class="min-h-screen w-screen bg-red-100 flex flex-col items-center px-6"
-  >
+  <body class="min-h-screen w-full bg-gradient-to-r from-red-200 to-red-400 flex flex-col items-center px-6">
     <%- include("./nav") %>
-    <h1 class="text-4xl font-sans mt-4">login page</h1>
-    <form
-      class="h-96 w-56 flex flex-col justify-evenly items-center border border-black rounded mt-6"
-      action="/users/login"
-      method="post"
-    >
-     
-      <input
-        class="rounded px-3 py-2 bg-gray-900 text-white"
-        type="text"
-        name="email"
-        placeholder="enter your email"
-      />
-      <input
-        class="rounded px-3 py-2 bg-gray-900 text-white"
-        type="password"
-        name="password"
-        placeholder="enter password"
-      />
-      <input
-        class="px-3 py-2 rounded-xl bg-black text-xl text-white"
-        type="submit"
-        
-      />
+    
+    <h1 class="text-5xl font-bold mt-8 text-white drop-shadow-lg">Login</h1>
+    
+    <form class="w-full max-w-sm flex items-center flex-col gap-8 p-8 bg-white shadow-lg rounded-lg mt-6" action="/users/login" method="post">
+      <input class="rounded-md w-full px-4 py-3 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500" 
+        type="email" name="email" placeholder="Enter your email" required />
+      
+      <input class="rounded-md w-full px-4 py-3 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500" 
+        type="password" name="password" placeholder="Enter password" required />
+      
+      <button class="w-1/2 px-4 py-3 rounded-md bg-black text-white text-lg font-semibold hover:bg-gray-800 transition duration-300">
+        Login
+      </button>
     </form>
   </body>
 </html>
