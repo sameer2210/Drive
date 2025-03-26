@@ -8,11 +8,22 @@
   </head>
   <body class="bg-gray-100 flex flex-col items-center p-6">
     <h1 class="text-4xl font-bold text-gray-800 mb-6">Your Uploaded Posts</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-4xl">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-4xl"
+    >
       <% allPost.forEach(element => { %>
       <div class="bg-white shadow-lg rounded-lg p-4 flex flex-col items-center">
-        <img class="w-full h-40 object-cover rounded-md" src="<%= element.postImage %>" alt="Network error" />
-        <a href="<%= element.postImage %>" download class="mt-4 px-4 py-2 bg-gradient-to-r from-red-500 to-red-300 text-white rounded-md hover:bg-red-600 transition">Download</a>
+        <img
+          class="w-full h-40 object-cover rounded-md"
+          src="<%= element.postImage %>"
+          alt="Network error"
+        />
+        <a
+          href="<%= element.postImage %>"
+          download
+          class="mt-4 px-4 py-2 bg-gradient-to-r from-red-500 to-red-300 text-white rounded-md hover:bg-red-600 transition"
+          >Download</a
+        >
       </div>
       <% }); %>
     </div>

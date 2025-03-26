@@ -7,9 +7,7 @@ module.exports.authMiddleware = async (req, res, next) => {
     const token = req.cookies.token; // Get token from cookies
 
     if (!token) {
-      return res
-        .status(401)
-        .json({ message: "Token not defined, access denied" });
+      return res.status(401).redirect("/users/login");
     }
 
     const decoded = jwt.verify(token, process.env.jwt_seC_key); // Verify token

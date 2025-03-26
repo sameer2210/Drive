@@ -20,35 +20,34 @@ module.exports.createUserPost = async (req, res) => {
     // res.send(errors);
   }
   try {
-  const { userName, email, password } = req.body;
+    const { userName, email, password } = req.body;
 
-  const existUser = await userModel.findOne({ email });
+    const existUser = await userModel.findOne({ email });
 
-  if (existUser) {
-    // res.send(`user already Exist`);
-    return res.status(400).json({ message: "User already exists" });
-  }
-  const hashPassword = await bcryptjs.hash(password, 10);
+    if (existUser) {
+      // res.send(`user already Exist`);
+      return res.status(400).json({ message: "User already exists" });
+    }
+    const hashPassword = await bcryptjs.hash(password, 10);
 
-  const newUser = await userModel.create({
-    userName,
-    email,
-    password: hashPassword
-  });
+    const newUser = await userModel.create({
+      userName,
+      email,
+      password: hashPassword
+    });
 
-  const token = jwt.sign(
-    {
-      id: newUser._id,
-      email: newUser.email
-    },
-    process.env.jwt_seC_key
-  );
+    const token = jwt.sign(
+      {
+        id: newUser._id,
+        email: newUser.email
+      },
+      process.env.jwt_seC_key
+    );
 
-  res.status(201).cookie("token", token).json({
-    message: "User registered successfully",
-  });
+    res.cookie("token", token);
+    res.redirect("/users/login");
   } catch (error) {
-  res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -58,33 +57,33 @@ module.exports.loginUserGet = (req, res) => {
   res.render("login");
 };
 module.exports.loginUserPost = async (req, res) => {
-  try{
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const existUser = await userModel.findOne({ email });
+    const existUser = await userModel.findOne({ email });
 
-  if (!existUser) {
-    // alert(`user not exist  please register....`);
-    res.redirect("/users/");
-  }
+    if (!existUser) {
+      // alert(`user not exist  please register....`);
+      res.redirect("/users/");
+    }
 
-  const isMatch = await bcryptjs.compare(password, existUser.password);
-  if (!isMatch) {
-    res.send(`Password not match`);
-  }
-  const token = jwt.sign(
-    {
-      id: existUser._id,
-      email: existUser.email
-    },
-    process.env.jwt_seC_key
-  );
+    const isMatch = await bcryptjs.compare(password, existUser.password);
+    if (!isMatch) {
+      res.send(`Password not match`);
+    }
+    const token = jwt.sign(
+      {
+        id: existUser._id,
+        email: existUser.email
+      },
+      process.env.jwt_seC_key
+    );
 
-  res.cookie("token", token);
-  res.redirect("/users/profile");
-  //  res.status(201).cookie("token", token).json({
-  //     message: "User registered successfully",
-  //   });
+    res.cookie("token", token);
+    res.redirect("/users/profile");
+    //  res.status(201).cookie("token", token).json({
+    //     message: "User registered successfully",
+    //   });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

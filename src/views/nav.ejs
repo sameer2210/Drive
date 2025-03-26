@@ -13,26 +13,39 @@
         <h1 class="text-3xl font-bold flex items-center gap-2">
           <span class="text-blue-500"></span> DriveLink
         </h1>
-        
+
         <!-- Desktop Links -->
         <div class="hidden md:flex gap-6 text-lg">
           <a href="/users/" class="hover:text-blue-400 transition">Register</a>
-          <a href="/users/login" class="hover:text-blue-400 transition">Log in</a>
-          <a href="/users/profile" class="hover:text-blue-400 transition">Home</a>
+          <a href="/users/login" class="hover:text-blue-400 transition"
+            >Log in</a
+          >
         </div>
-        
+
         <!-- Mobile Menu Button -->
-        <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">☰</button>
+        <button
+          id="menu-btn"
+          class="md:hidden text-white text-2xl focus:outline-none"
+        >
+          ☰
+        </button>
       </div>
-      
+
       <!-- Mobile Links -->
-      <div id="mobile-menu" class="hidden md:hidden flex flex-col gap-4 mt-4 text-center text-lg">
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden flex flex-col gap-4 mt-4 text-center text-lg"
+      >
         <a href="/users/" class="block hover:text-blue-400">Register</a>
         <a href="/users/login" class="block hover:text-blue-400">Log in</a>
-        <a href="/users/profile" class="block hover:text-blue-400">Home</a>
       </div>
     </nav>
-    
-   
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
   </body>
 </html>
