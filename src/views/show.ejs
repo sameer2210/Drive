@@ -18,14 +18,12 @@
           src="<%= element.postImage %>"
           alt="Network error"
         />
-        <a
-          href="<%= element.postImage %>"
-          download
-          class="mt-4 px-4 py-2 bg-gradient-to-r from-red-500 to-red-300 text-white rounded-md hover:bg-red-600 transition"
-          >Download</a
-        >
+        <a href="<%= element.postImage %>" download="<%= element.postImage.split('/').pop() %>" class="mt-4 px-4 py-2 bg-gradient-to-r from-red-500 to-red-300 text-white rounded-md hover:bg-red-600 transition" 
+          >Download</a>
+        
       </div>
       <% }); %>
     </div>
+    <a href="/profile" class="px-4 py-1 rounded-lg text-2xl text-black bg-gray-300 hover:bg-gray-700 hover:text-white "><u>back</u></a>
   </body>
 </html>
