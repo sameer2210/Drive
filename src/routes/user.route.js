@@ -6,7 +6,8 @@ const {
   createUserPost,
   loginUserGet,
   loginUserPost,
-  profileUserGet
+  profileUserGet,
+  logoutUserGet
 } = require("../controller/user.controller");
 
 // to start use /users/
@@ -17,5 +18,8 @@ router.get("/login", loginUserGet);
 router.post("/login",validateUserLogin, loginUserPost);
 
 router.get("/profile", authMiddleware, profileUserGet);
+
+router.get('/logout',logoutUserGet)
+
 
 module.exports = router;

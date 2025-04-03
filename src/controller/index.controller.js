@@ -2,11 +2,13 @@ const cloudinary = require("../helper/upload");
 const postModel = require("../models/post.models");
 
 module.exports.profileGet = (req, res) => {
+  console.log(req.user)
+
   res.render("profile");
 };
 
 module.exports.showGet = async (req, res) => {
-  const allPost = await postModel.find();
+  const allPost = await postModel.find({user: req.user.id});
   res.render("show", { allPost });
 };
 
@@ -20,7 +22,8 @@ module.exports.uploadPost = async (req, res) => {
     const result = await cloudinary(req.file.buffer);
 
     const data = new postModel({
-      postImage: result
+      postImage: result,
+      user: req.user.id
     });
     await data.save();
     console.log(data, "he");

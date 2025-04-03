@@ -72,6 +72,7 @@ module.exports.loginUserPost = async (req, res) => {
       res.send(`Password not match`);
     }
     const token = jwt.sign(
+      
       {
         id: existUser._id,
         email: existUser.email
@@ -86,9 +87,16 @@ module.exports.loginUserPost = async (req, res) => {
     //   });
   } catch (error) {
     res.status(500).json({ error: error.message });
+    res.redirect('/login')
   }
 };
 
 module.exports.profileUserGet = (req, res) => {
   res.render("profile");
+};
+
+
+module.exports.logoutUserGet = (req, res) => {
+  res.cookie("token", "");
+  res.redirect('/login');
 };
