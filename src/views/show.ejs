@@ -6,24 +6,41 @@
     <title>Your Uploaded Posts</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100 flex flex-col items-center p-6">
-    <h1 class="text-4xl font-bold text-gray-800 mb-6">Your Uploaded Posts</h1>
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-4xl"
-    >
+
+  <body class="min-h-screen bg-gradient-to-br from-[#0f0f0f] via-[#4d4d4d] to-[#111827] text-white flex flex-col items-center p-6 space-y-8">
+
+    <!-- Heading -->
+    <h1 class="text-4xl md:text-4xl font-extrabold text-center tracking-tight">
+      Your <span class="text-indigo-500">Uploaded</span> Posts
+    </h1>
+
+    <!-- Posts Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-6xl">
       <% allPost.forEach(element => { %>
-      <div class="bg-white shadow-lg rounded-lg p-4 flex flex-col items-center">
+      <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl shadow-md p-4 flex flex-col items-center hover:scale-105 transition duration-300">
         <img
-          class="w-full h-40 object-cover rounded-md"
+          class="w-full h-40 object-cover rounded-md border border-gray-600"
           src="<%= element.postImage %>"
           alt="Network error"
         />
-        <a href="<%= element.postImage %>" download="<%= element.postImage.split('/').pop() %>" class="mt-4 px-4 py-2 bg-gradient-to-r from-red-500 to-red-300 text-white rounded-md hover:bg-red-600 transition" 
-          >Download</a>
-        
+        <a
+          href="<%= element.postImage %>"
+          download="<%= element.postImage.split('/').pop() %>"
+          class="mt-4 px-4 py-2 bg-gradient-to-r from-red-600 to-red-400 text-white font-semibold rounded-full hover:from-red-700 hover:to-red-500 transition"
+        >
+          Download
+        </a>
       </div>
       <% }); %>
     </div>
-    <a href="/profile" class="px-4 py-1 rounded-lg text-2xl text-black bg-gray-300 hover:bg-gray-700 hover:text-white "><u>back</u></a>
+
+    <!-- Back Button -->
+    <a
+      href="/profile"
+      class="px-6 py-2 text-lg font-medium bg-gray-200 text-black rounded-full hover:bg-indigo-600 transition"
+    >
+      ← Back to Profile
+    </a>
+
   </body>
 </html>

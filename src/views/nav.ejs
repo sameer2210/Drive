@@ -6,18 +6,28 @@
     <title>Drive</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100">
-    <nav class="w-full mt-4 bg-black text-white p-4 rounded-full">
-      <div class="max-w-7xl mx-auto flex justify-between items-center">
+
+  <body
+    class="bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#111827] text-white min-h-screen "
+  >
+    <!-- Navbar -->
+    <nav
+      class="w-full fixed top-4 left-1/2 transform -translate-x-1/2 max-w-6xl px-6 py-3 bg-white/5 backdrop-blur-xl border border-white/10 shadow-md rounded-full z-50"
+    >
+      <div class="flex justify-between items-center">
         <!-- Logo -->
-        <h1 class="text-3xl font-bold flex items-center gap-2">
-          <span class="text-blue-500"></span> DriveLink
+        <h1
+          class="text-2xl font-extrabold tracking-wide flex items-center gap-2 text-indigo-400"
+        >
+          DriveLink
         </h1>
 
         <!-- Desktop Links -->
-        <div class="hidden md:flex gap-8 text-lg">
-          <a href="/users/" class="hover:text-blue-400 transition">Register</a>
-          <a href="/users/login" class="hover:text-blue-400 transition"
+        <div class="hidden md:flex gap-8 text-sm font-medium">
+          <a href="/users/" class="hover:text-indigo-400 transition"
+            >Register</a
+          >
+          <a href="/users/login" class="hover:text-indigo-400 transition"
             >Log in</a
           >
         </div>
@@ -34,18 +44,43 @@
       <!-- Mobile Links -->
       <div
         id="mobile-menu"
-        class="hidden md:hidden flex flex-col gap-4 mt-4 text-center text-lg"
+        class="hidden md:hidden flex-col gap-4 mt-4 text-center text-sm font-medium animate-fadeIn"
       >
-        <a href="/users/" class="block hover:text-blue-400">Register</a>
-        <a href="/users/login" class="block hover:text-blue-400">Log in</a>
+        <a href="/users/" class="block hover:text-indigo-400 transition"
+          >Register</a
+        >
+        <a href="/users/login" class="block hover:text-indigo-400 transition"
+          >Log in</a
+        >
       </div>
     </nav>
+
+    <!-- JS Toggle -->
     <script>
       const menuBtn = document.getElementById("menu-btn");
       const mobileMenu = document.getElementById("mobile-menu");
+
       menuBtn.addEventListener("click", () => {
         mobileMenu.classList.toggle("hidden");
       });
     </script>
+
+    <!-- Tailwind Custom Animation -->
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+    </style>
   </body>
 </html>

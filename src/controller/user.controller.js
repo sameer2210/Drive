@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/users.models");
 const { validationResult } = require("express-validator");
 
-
 module.exports.createUserGet = (req, res) => {
   res.render("register");
 };
@@ -64,15 +63,15 @@ module.exports.loginUserPost = async (req, res) => {
 
     if (!existUser) {
       // alert(`user not exist  please register....`);
-      res.redirect("/users/");
+      // return res.redirect("/users/?error=User does not exist, please register.");
+      return res.redirect("/users/");
     }
 
     const isMatch = await bcryptjs.compare(password, existUser.password);
     if (!isMatch) {
-      res.send(`Password not match`);
+      return res.send(`Password not match`);
     }
     const token = jwt.sign(
-      
       {
         id: existUser._id,
         email: existUser.email
@@ -86,8 +85,9 @@ module.exports.loginUserPost = async (req, res) => {
     //     message: "User registered successfully",
     //   });
   } catch (error) {
+    console.error("Login error:", error); // Optional: log to console
     res.status(500).json({ error: error.message });
-    res.redirect('/login')
+    // res.redirect('/login')
   }
 };
 
@@ -95,8 +95,19 @@ module.exports.profileUserGet = (req, res) => {
   res.render("profile");
 };
 
+// module.exports.logoutUserGet = (req, res) => {
+//   res.cookie("token", "");
+//   res.render('/login');
+// };
 
 module.exports.logoutUserGet = (req, res) => {
-  res.cookie("token", "");
-  res.redirect('/login');
+  res.clearCookie("token");
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.log("Error destroying session:", err);
+      }
+    });
+  }
+  res.redirect("/login");
 };
